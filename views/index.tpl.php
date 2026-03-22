@@ -31,7 +31,7 @@
       </div>
     </div>
 <!-- Modal add city -->
-<div class="modal fade" id="addCity" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="addCity"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -39,12 +39,28 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <form  id="addCityForm" method="post">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="addName" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" id="addName" placeholder="City Name">
+            
+            </div>
+            <div class="mb-3">
+              <label for="addPopulation" class="form-label">Population</label>
+                <input type="number" class="form-control" name="population" id="addPopulation" placeholder="Population City">
+                <input type="hidden" name="addCity">
+           
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="btn-add-submit">Save</button>
+         </div>
+        </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
+
     </div>
   </div>
 </div>
@@ -70,6 +86,7 @@
 
 
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/main.js"></script>
   </body>
 </html>

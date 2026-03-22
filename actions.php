@@ -5,6 +5,8 @@
   
   require_once 'classes/Db.php';
   require_once 'classes/Pagination.php'; 
+  require_once 'classes/Validator.php'; 
+
   require_once 'functions.php';
 
  
@@ -16,9 +18,6 @@
 if(isset($data['page'])){
 
   $page = $data['page'];
-
-
-
 
   $total = get_count_t('city');
 
@@ -34,5 +33,51 @@ if(isset($data['page'])){
 
   die;
 
+};
+
+
+if(isset($_POST['addCity'])){
+
+  $dataForm = $_POST;
+
+  $validation = new Validator();
+
+  $validation->validate($dataForm, [
+
+    'name' => ['required' =>true],
+    'population' => ['minNum' =>1]
+
+  ]);
+
+
+  if($validation->hasErrors()){
+
+    $errors = '<ul class="list-unstyled text-start text-danger">';
+
+    foreach($validation->getErrors() as $nameError){
+
+        foreach($nameError as $valueError){
+          $errors.="<li>$valueError</li>";
+        }
+
+    }
+
+    $errors.='<ul>';
+
+    $result = ['answer' =>'error', 'errors' =>$errors];
+
+    
+  }  else{
+
+
+    $result = ['answer' => 'success'];
+
+  }
+
+  echo json_encode($result);
+  die;
+
+
 }
+
 
