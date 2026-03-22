@@ -1,0 +1,3 @@
+[2026-03-15, 07:20:40] Db Error:SQLSTATE[42S02]: Base table or view not found: 1146 Table 'world.world' doesn't exist 
+[2026-03-15, 07:23:30] Db Error:SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM `city`' at line 1 
+[2026-03-15, 07:23:31] Db Error:SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM `city`' at line 1 
