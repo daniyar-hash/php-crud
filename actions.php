@@ -1,12 +1,10 @@
 <?php
 
   $db_config =  require_once 'db.php';
-
-  
+ 
   require_once 'classes/Db.php';
   require_once 'classes/Pagination.php'; 
   require_once 'classes/Validator.php'; 
-
   require_once 'functions.php';
 
  
@@ -14,6 +12,8 @@
 
 
   $data = json_decode(file_get_contents('php://input'), true);
+
+  // pagination
 
 if(isset($data['page'])){
 
@@ -35,6 +35,10 @@ if(isset($data['page'])){
 
 };
 
+
+
+
+//  add city
 
 if(isset($_POST['addCity'])){
 
@@ -62,7 +66,7 @@ if(isset($_POST['addCity'])){
 
     }
 
-    $errors.='<ul>';
+    $errors.='</ul>';
 
     $result = ['answer' =>'error', 'errors' =>$errors];
 
@@ -71,6 +75,8 @@ if(isset($_POST['addCity'])){
 
 
     $result = ['answer' => 'success'];
+    
+    add_city($dataForm['name'], $dataForm['population']);
 
   }
 
@@ -80,4 +86,114 @@ if(isset($_POST['addCity'])){
 
 }
 
+// get city for edit
 
+if(isset($data['action']) && $data['action'] =='get_city'){
+
+  $id = isset($data['id']) ? intval($data['id']) : 0;
+
+  $rowCity = $db->query("SELECT * FROM city WHERE id = ?", [$id])->find();
+
+  if($rowCity){
+
+    $res = ['answer' => 'success', 'rowCity' => $rowCity];
+
+  } else {
+
+      $res = ['answer' =>'error'];
+  }
+
+  echo json_encode($res);
+
+  die;
+
+}
+
+
+// delete city
+
+if(isset($data['action']) && $data['action'] =='delete_city'){
+
+  $id = isset($data['id']) ? intval($data['id']) : 0;
+
+  $res = $db->query("DELETE FROM city WHERE id = ?", [$id]);
+
+  if($res){
+
+    $result = ['answer' => 'success'];
+
+  } else{
+
+    $result = ['answer' =>'error'];
+  }
+
+   echo json_encode($result);
+  die;
+
+
+
+
+
+}
+
+
+
+//  edit city
+
+if(isset($_POST['editCity'])) {
+
+  $dataForm = $_POST;
+
+  $validation = new Validator();
+
+  $validation->validate($dataForm, [
+
+    'name' => ['required' =>true],
+    'population' => ['minNum' =>1],
+    'id' => ['minNum' =>1]
+
+  ]);
+
+
+  if($validation->hasErrors()){
+
+    $errors = '<ul class="list-unstyled text-start text-danger">';
+
+    foreach($validation->getErrors() as $nameError){
+
+        foreach($nameError as $valueError){
+          $errors.="<li>$valueError</li>";
+        }
+
+    }
+
+    $errors.='</ul>';
+
+    $result = ['answer' =>'error', 'errors' =>$errors];
+
+    
+  }  else{
+
+   
+      edit_city($dataForm['name'], $dataForm['population'], $dataForm['id']);
+
+      $result = ['answer' => 'success'];
+
+  }
+
+  echo json_encode($result);
+  die;
+
+}
+
+if(isset($data['search'])){
+
+  $wordS = trim($data['search']);
+
+  $foundWord = findWord($wordS);
+
+   require_once 'views/search.tpl.php';
+  die;
+
+
+}

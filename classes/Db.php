@@ -29,7 +29,7 @@ class Db
 
     public function getConnection(array $db_config)
     {
-        $dsn = "mysql:host={$db_config['host']};dbname={$db_config['dbname']};charset={$db_config['charset']}";
+        $dsn = "mysql:host={$db_config['hostname']};dbname={$db_config['dbname']};charset={$db_config['charset']}";
 
         try {
             $this->connection = new PDO($dsn, $db_config['username'], $db_config['password'], $db_config['options']);

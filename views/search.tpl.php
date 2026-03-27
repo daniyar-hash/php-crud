@@ -1,4 +1,4 @@
-  <?php if(!empty($cities)):  ?> 
+ <?php if(!empty($foundWord)):  ?> 
 
    <?= $pagination; ?>
 
@@ -13,7 +13,7 @@
   </thead>
   <tbody>
 
-    <?php  foreach($cities as $val):?>
+    <?php  foreach($foundWord as $val):?>
     <tr id="city-<?= $val['id'] ?>">
       <th scope="row"><?= $val['id'] ?></th>
       <td class="cityName"><?= $val['name'] ?></td>

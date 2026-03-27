@@ -1,6 +1,6 @@
 <?php
 
-
+  error_reporting(E_ALL);
   $db_config =  require_once 'db.php';
 
   
@@ -18,8 +18,6 @@
   $curr_page = $_GET['page'] ?? 1;
 
 
-
-
   $pagination = new myframew\Pagination($total, $per_page, $curr_page);
   $start = $pagination->getStart();
 
@@ -31,5 +29,8 @@
   // echo '</pre>';
 
 require_once 'views/index.tpl.php';
+
+
+
 
 
