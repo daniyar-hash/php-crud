@@ -1,5 +1,7 @@
 <?php
 
+use myframew\Pagination;
+
   $db_config =  require_once 'db.php';
  
   require_once 'classes/Db.php';
@@ -197,3 +199,8 @@ if(isset($data['search'])){
 
 
 }
+
+
+
+
+

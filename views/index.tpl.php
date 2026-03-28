@@ -65,7 +65,7 @@
 
       <div class="table-responsive my-3">
 
-       <?php require_once 'views/index-content.tpl.php';  ?>
+         <?php require_once 'views/index-content.tpl.php';  ?>
        
        </div>
       </div>
