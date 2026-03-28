@@ -24,9 +24,9 @@
 
   $cities = get_cities($start, $per_page);
 
-  // echo '<pre>';
-  // print_r($cities);
-  // echo '</pre>';
+  echo '<pre>';
+  print_r($cities);
+  echo '</pre>';
 
 require_once 'views/index.tpl.php';
 
